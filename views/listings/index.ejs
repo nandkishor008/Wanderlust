@@ -1,0 +1,311 @@
+<% layout("/layouts/boilerplate") %>
+<%= success %>
+
+<style>
+  .filter-slider-container {
+    flex-grow: 1;
+    overflow: hidden;
+  }
+
+  .scroll-container {
+    overflow-x: auto;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
+  .scroll-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  #filters {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    white-space: nowrap;
+  }
+  #filters a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+  .slider-arrow {
+    border: none;
+    background-color: transparent;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0 10px;
+    color: #333;
+  }
+
+  .slider-arrow:disabled {
+    color: #ccc;
+    cursor: default;
+  }
+
+  .filter {
+    text-align: center;
+    opacity: 0.7;
+    margin-top: 1rem;
+    margin-right: 1.5rem;
+    transition: transform 0.2s ease;
+    flex: 0 0 auto;
+    cursor: pointer;
+  }
+
+  .filter:hover {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+
+  .filter p {
+    font-size: 0.8rem;
+    margin: 0;
+  }
+
+  .tax-toggle {
+    border: 1px solid black;
+    border-radius: 1rem;
+    height: 3rem;
+    padding: 0.5rem 1rem;
+    white-space: nowrap;
+    margin-left: 1rem;
+  }
+
+  .tax-info {
+    display: none;
+  }
+
+  .pagination-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  .custom-pagination .page-item .page-link {
+    color: #fe424d;
+    background-color: white;
+    border: 1px solid #fe424d;
+    margin: 0 5px;
+    border-radius: 2rem;
+    padding: 0.5rem 1.2rem;
+    font-weight: 500;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: all 0.25s ease-in-out;
+  }
+
+  .custom-pagination .page-item .page-link:hover {
+    background-color: #fe424d;
+    color: white;
+  }
+
+  .custom-pagination .page-item.active .page-link {
+    background-color: #fe424d;
+    color: white;
+    border-color: #fe424d;
+    pointer-events: none;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(254, 66, 77, 0.3);
+  }
+
+  .pagination {
+  flex-wrap: wrap;
+  border-radius: 50%;
+
+  
+}
+
+.pagination .page-link {
+  margin: 2px;
+  background-color: #fe424d;
+  color: white;
+  /* border-radius: 50%; */
+  
+}
+
+.active-filter {
+  opacity: 1 !important;
+  transform: scale(1.1);
+  border-bottom: 2px solid #fe424d;
+  font-weight: bold;
+}
+
+
+</style>
+
+
+<!-- Filters Row -->
+<div class="d-flex align-items-center justify-content-between mb-3">
+  <!-- Filters & Slider -->
+  <div class="filter-slider-container d-flex align-items-center">
+    <button id="leftArrow" class="slider-arrow"><i class="fa-solid fa-angle-left"></i></button>
+
+    <div id="filtersWrapper" class="scroll-container">
+ <div id="filters">
+  <a href="/listings/search?category=Trending&search=<%= query.search || '' %>" class="filter <%= query.category === 'Trending' ? 'active-filter' : '' %>">
+    <div><i class="fa-solid fa-firefox-browser"></i></div><p>Trending</p>
+  </a>
+  <a href="/listings/search?category=Room&search=<%= query.search || '' %>" class="filter <%= query.category === 'Room' ? 'active-filter' : '' %>">
+    <div><i class="fa-solid fa-bed"></i></div><p>Room</p>
+  </a>
+  <a href="/listings/search?category=Iconic cities&search=<%= query.search || '' %>" class="filter <%= query.category === 'Iconic cities' ? 'active-filter' : '' %>">
+    <div><i class="fa-solid fa-mountain-city"></i></div><p>Iconic cities</p>
+  </a>
+  <a href="/listings/search?category=Mountains&search=<%= query.search || '' %>" class="filter <%= query.category === 'Mountains' ? 'active-filter' : '' %>">
+    <div><i class="fa-solid fa-mountain"></i></div><p>Mountains</p>
+  </a>
+  <a href="/listings/search?category=Castles&search=<%= query.search || '' %>" class="filter <%= query.category === 'Castles' ? 'active-filter' : '' %>">
+    <div><i class="fa-solid fa-fort-awesome"></i></div><p>Castles</p>
+  </a>
+  <a href="/listings/search?category=Amazing Pools&search=<%= query.search || '' %>" class="filter <%= query.category === 'Amazing Pools' ? 'active-filter' : '' %>">
+    <div><i class="fa-solid fa-person-swimming"></i></div><p>Amazing Pools</p>
+  </a>
+  <a href="/listings/search?category=Camping&search=<%= query.search || '' %>" class="filter <%= query.category === 'Camping' ? 'active-filter' : '' %>">
+    <div><i class="fa-solid fa-campground"></i></div><p>Camping</p>
+  </a>
+  <a href="/listings/search?category=Farms&search=<%= query.search || '' %>" class="filter <%= query.category === 'Farms' ? 'active-filter' : '' %>">
+    <div><i class="fa-solid fa-cow"></i></div><p>Farms</p>
+  </a>
+  <a href="/listings/search?category=Arctic&search=<%= query.search || '' %>" class="filter <%= query.category === 'Arctic' ? 'active-filter' : '' %>">
+    <div><i class="fa-solid fa-snowflake"></i></div><p>Arctic</p>
+  </a>
+  <a href="/listings/search?category=Domes&search=<%= query.search || '' %>" class="filter <%= query.category === 'Domes' ? 'active-filter' : '' %>">
+    <div><i class="fa-solid fa-igloo"></i></div><p>Domes</p>
+  </a>
+  <a href="/listings/search?category=Boats&search=<%= query.search || '' %>" class="filter <%= query.category === 'Boats' ? 'active-filter' : '' %>">
+    <div><i class="fa-solid fa-ship"></i></div><p>Boats</p>
+  </a>
+  <a href="/listings/search?category=Beach&search=<%= query.search || '' %>" class="filter <%= query.category === 'Beach' ? 'active-filter' : '' %>">
+    <div><i class="fa-solid fa-umbrella-beach"></i></div><p>Beach</p>
+  </a>
+  <a href="/listings/search?category=Historic&search=<%= query.search || '' %>" class="filter <%= query.category === 'Historic' ? 'active-filter' : '' %>">
+    <div><i class="fa-solid fa-landmark"></i></div><p>Historic</p>
+  </a>
+  <a href="/listings/search?category=Luxury&search=<%= query.search || '' %>" class="filter <%= query.category === 'Luxury' ? 'active-filter' : '' %>">
+    <div><i class="fa-solid fa-gem"></i></div><p>Luxury</p>
+  </a>
+  <a href="/listings/search?category=Ski&search=<%= query.search || '' %>" class="filter <%= query.category === 'Ski' ? 'active-filter' : '' %>">
+    <div><i class="fa-solid fa-skiing"></i></div><p>Ski</p>
+  </a>
+  <a href="/listings/search?category=Nature&search=<%= query.search || '' %>" class="filter <%= query.category === 'Nature' ? 'active-filter' : '' %>">
+    <div><i class="fa-solid fa-tree"></i></div><p>Nature</p>
+  </a>
+  <a href="/listings/search?category=Desert&search=<%= query.search || '' %>" class="filter <%= query.category === 'Desert' ? 'active-filter' : '' %>">
+    <div><i class="fa-solid fa-sun"></i></div><p>Desert</p>
+  </a>
+  <a href="/listings/search?category=Island&search=<%= query.search || '' %>" class="filter <%= query.category === 'Island' ? 'active-filter' : '' %>">
+    <div><i class="fa-solid fa-water"></i></div><p>Island</p>
+  </a>
+</div>
+
+
+</div>
+
+    <button id="rightArrow" class="slider-arrow"><i class="fa-solid fa-angle-right"></i></button>
+  </div>
+
+  <!-- Tax Toggle (fixed right) -->
+  <div class="tax-toggle">
+    <div class="form-check-reverse form-switch">
+      <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+      <label class="form-check-label" for="switchCheckDefault">
+        <h6>Display total after taxes</h6>
+      </label>
+    </div>
+  </div>
+</div>
+
+<!-- Listings -->
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-1 g-4">
+  <% for (let listing of allListing) { %>
+    <div class="col">
+      <a href="/listings/<%= listing._id %>?page=<%= currentPage %><%= query.category ? `&category=${query.category}` : '' %><%= query.search ? `&search=${query.search}` : '' %>" class="text-decoration-none text-dark">
+
+        <div class="card listing-card">
+          <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image" style="height: 20rem; object-fit: cover;">
+          <div class="card-body">
+            <p class="card-text mb-1"><strong> <%- highlight ? listing.title.replace(new RegExp(highlight, 'gi'), match => `<mark>${match}</mark>`) : listing.title %></strong></p>
+            <p class="card-text mb-0">&#8377; <%= listing.price.toLocaleString("en-IN") %>/night
+              <i class="tax-info"> &nbsp; &nbsp;+18% GST</i>
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+  <% } %>
+</div>
+
+<!-- Pagination -->
+<%
+  let queryString = '';
+  for (let key in query) {
+    if (key !== 'page') {
+      queryString += `&${key}=${query[key]}`;
+    }
+  }
+%>
+
+<nav aria-label="Page navigation">
+ <ul class="pagination justify-content-center flex-wrap">
+
+  <% if (currentPage > 1) { %>
+    <li class="page-item">
+      <a class="page-link" href="?page=<%= currentPage - 1 %><%= queryString %>">Previous</a>
+    </li>
+  <% } %>
+
+  <% if (currentPage > 3) { %>
+    <li class="page-item">
+      <a class="page-link" href="?page=1<%= queryString %>">1</a>
+    </li>
+    <li class="page-item disabled"><span class="page-link">...</span></li>
+  <% } %>
+
+  <% for (let i = currentPage - 2; i <= currentPage + 2; i++) {
+       if (i > 0 && i <= totalPages) { %>
+      <li class="page-item <%= currentPage === i ? 'active' : '' %>">
+        <a class="page-link" href="?page=<%= i %><%= queryString %>"><%= i %></a>
+      </li>
+  <% } } %>
+
+  <% if (currentPage < totalPages - 2) { %>
+    <li class="page-item disabled"><span class="page-link">...</span></li>
+    <li class="page-item">
+      <a class="page-link" href="?page=<%= totalPages %><%= queryString %>"><%= totalPages %></a>
+    </li>
+  <% } %>
+
+  <% if (currentPage < totalPages) { %>
+    <li class="page-item">
+      <a class="page-link" href="?page=<%= currentPage + 1 %><%= queryString %>">Next</a>
+    </li>
+  <% } %>
+
+</ul>
+
+</nav>
+
+
+<script>
+  const taxSwitch = document.getElementById("switchCheckDefault");
+  taxSwitch.addEventListener("click", () => {
+    let taxInfo = document.getElementsByClassName("tax-info");
+    for (let info of taxInfo) {
+      info.style.display = (info.style.display !== "inline") ? "inline" : "none";
+    }
+  });
+
+  const filtersWrapper = document.getElementById("filtersWrapper");
+  const leftArrow = document.getElementById("leftArrow");
+  const rightArrow = document.getElementById("rightArrow");
+  const scrollAmount = 300;
+
+  leftArrow.addEventListener("click", () => {
+    filtersWrapper.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+  });
+
+  rightArrow.addEventListener("click", () => {
+    filtersWrapper.scrollBy({ left: scrollAmount, behavior: "smooth" });
+  });
+</script>
