@@ -121,3 +121,91 @@ body{
   }
 
 
+/* Category Scroll Fix */
+@media (max-width: 768px) {
+  #filtersWrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 10px;
+  }
+
+  #filters {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.8rem;
+  }
+
+  .filter {
+    flex: 0 0 auto;
+    font-size: 0.75rem;
+    text-align: center;
+  }
+
+  .filter i {
+    font-size: 1.2rem;
+  }
+
+  .tax-toggle {
+    display: none;
+  }
+}
+
+
+.review-card {
+  max-width: 350px;
+  min-width: 220px;
+  margin: 0 auto;
+  border-radius: 12px;
+  padding-left: 10px;
+  padding-bottom: 5px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+@media (max-width: 600px) {
+  .review-card {
+    max-width: 100%;
+    min-width: 0;
+    border-radius: 0;
+  }
+}
+
+/* Only for main listing image */
+.listing-image-fit {
+  width: 100%;
+  height: 340px;              /* Desktop height */
+  object-fit: cover;          /* Ensures image covers the area, cropping if needed */
+  object-position: center;    /* Center the image in the box */
+  /* Optional: matches Bootstrap card's rounded corners */
+  display: block;
+}
+
+@media (max-width: 992px) {
+  .listing-image-fit {
+    height: 220px;            /* Tablet height */
+  }
+}
+@media (max-width: 600px) {
+  .listing-image-fit {
+    height: 140px;            /* Mobile height */
+    border-radius: 0;         /* Optional: square corners on mobile */
+  }
+}
+
+/* For review images or other card images that should scale but not crop */
+.card-img-top, .img-fluid {
+  width: 100%;
+  border-radius: 20px 20px 0 0;
+  /* Remove max-height and object-fit here unless you want all card images to crop */
+}
+
+/* Responsive Map */
+#map {
+  width: 100%;
+  min-height: 220px;
+  border-radius: 10px;
+}
+@media (max-width: 600px) {
+  #map {
+    min-height: 120px;
+    border-radius: 0;
+  }
+}

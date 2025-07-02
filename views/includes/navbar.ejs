@@ -51,6 +51,40 @@
   padding: 0 2px;
 }
 
+@media (max-width: 768px) {
+  #searchForm {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .btn-search {
+    justify-content: center;
+  }
+
+  .navbar-nav.ms-auto {
+    margin-left: 0 !important;
+    text-align: center;
+  }
+
+  .navbar-nav .nav-link {
+    padding: 0.5rem 1rem;
+  }
+  
+  nav.navbar {
+    position: static !important;
+    z-index: 1030;
+  }
+}
+
+/* Add this in your <style> block */
+.navbar-collapse.show {
+  margin-bottom: 10rem; /* Adjust this to avoid overlapping — you can tweak this */
+  background-color: white; /* Optional: helps avoid transparency overlap */
+  z-index: 999;
+}
+
 
 </style>
 
